@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        ul {
+            list-style-type: none;
+            margin: 0px;
+            padding: 0px;
+            font-size: 200%;
+            width: 15%;
+            background-color: #C3E2C2;
+            height: 100%;
+            /* Full height */
+            position: fixed;
+            /* Make it stick, even on scroll */
+            overflow: auto;
+            /* Enable scrolling if the sidenav has too much content */
+
+            border: 1px solid #555;
+        }
+
+        li a {
+            display: block;
+            color: #000;
+            padding: 8px 16px;
+            border: 1px solid #555;
+            text-decoration: none;
+        }
+
+        /* Change the link color on hover */
+        li a:hover {
+            background-color: #EAECCC;
+            color: #CD8D7A;
+        }
+
+        .main-content {
+            margin-left: 15%;
+            /* Adjust to match the width of the sidebar */
+            padding: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <ul>
+        <li><a href="default.asp">Home</a></li>
+        <li><a href="news.asp">News</a></li>
+        <li><a href="contact.asp">Contact</a></li>
+        <li><a href="about.asp">About</a></li>
+    </ul>
+    <div class="main-content">
+        <h1>Pengaturan Kriteria</h1>
+
+        <form id="form1" action="http://localhost:3000/kriteria" method="POST">
+            <p>
+                <label for="totalQuestions">Jumlah Soal:</label>
+                <span id="displayTotalQuestions">0</span>
+            </p>
+
+            <p>
+                <label>Proporsi Tingkat Kesulitan (dalam jumlah):</label>
+            </p>
+            <p>
+                Sulit : <input type="number" id="hard" name="Soal Sulit" required>
+            </p>
+            <p>
+                Sedang : <input type="number" id="normal" name="Soal Normal" required>
+            </p>
+            <p>
+                Mudah : <input type="number" id="easy" name="Soal Mudah" required>
+            </p>
+            <button type="button" onclick="updateTotal()">Simpan</button>
+        </form>
+
+        <script>
+            function updateTotal(){
+                document.getElementById("form1").submit();
+            }
+
+            function updateTotal() {
+                const hard = parseInt(document.getElementById('hard').value) || 0;
+                const normal = parseInt(document.getElementById('normal').value) || 0;
+                const easy = parseInt(document.getElementById('easy').value) || 0;
+
+                const totalQuestions = hard + normal + easy;
+
+                // Update the content of the displayTotalQuestions span
+                document.getElementById('displayTotalQuestions').innerText = totalQuestions;
+            }
+        </script>
+        <script src="index.js"></script>
+    </div>
+
+</body>
+
+</html>
